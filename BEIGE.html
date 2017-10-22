@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>iNTRODUCCIÓN A LA Programación en ANDRIOD</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">iNTRODUCCIÓN A LA Programación en ANDRIOD</h1>
+</section>
+
+<section id="android" class="slide level1">
+<h1>Android</h1>
+<p>Es un Sistema Operativo Open-Source.<br />
+La base de la plataforma Android es el kernel de Linux.</p>
+<p>muchas cosas técnicas que ni yo entiendo</p>
+<p><img src="sample.png" style="background:none; border:none; box-shadow:none;"></p>
+</section>
+<section id="sdk" class="slide level1">
+<h1>SDK</h1>
+<p>Desarrollo en: * Java para la parte Lógica * XML para la parte gráfica</p>
+<p>Las herramientas del SDK (Software Development Kit) compilan el codigo, junto con los recursos y datos en un paquete de android, un .apk</p>
+</section>
+<section id="views" class="slide level1">
+<h1>Views</h1>
+<p>Son los elementos básicos de la interfaz gráfica. Son areas de la pantalla responsables de manejar eventos y de &quot;dibujar&quot;. Ej: TextView, ImageView, Layout, Button.</p>
+</section>
+<section id="layouts" class="slide level1">
+<h1>Layouts</h1>
+<p>Definen un conjunto de Views. Podemos definir las posiciones, apariencia y comportamiento de las mismas de dos formas: * Declarándolas en los layouts de XML * Instanciandolas en tiempo de ejecución</p>
+</section>
+<section id="activities" class="slide level1">
+<h1>Activities</h1>
+<p>Se ocupan de la interacción entre el usuario y la pantalla. Son como las &quot;páginas&quot; de una aplicación.<br />
+Una aplicación puede estar compuesta por una o varias activities, que trabajan independientemente y se comunican mediante mensajes (<em>Intent</em>s) que el SO recibe y envía.</p>
+<pre><code>&gt; public class MainActivity extends AppCompatActivity {}  </code></pre>
+<p>Trabajamos con instancias de Activity, que es una clase del SDK. Entonces, nuestras activities <strong>extienden</strong> (son subclases de) Activity (una clase definida en el SDK), heredando métodos, atributos, y el Ciclo de Vida.</p>
+</section>
+<section id="ciclo-de-vida" class="slide level1">
+<h1>Ciclo de Vida</h1>
+<p>Las Activities pasan por cuatro estados: * resumed (continuada) * paused * stopped * nonexistent En las transiciones entre cada estado se ejecutan el método correspondiente (<em>onPause</em>, <em>onResume</em>, etc)</p>
+</section>
+<section id="uniendo-la-gráfica-con-la-lógica" class="slide level1">
+<h1>Uniendo la gráfica con la lógica</h1>
+<p>Cuando creamos un layout, es conveniente asignarle un &quot;id&quot; a cáda View para poder acceder a él desde nuestros archivos .java</p>
+<p>en XML:</p>
+<pre><code>    &lt;TextView  
+    android:id=&quot;@+id/texto&quot;   
+    /&gt;  </code></pre>
+<p>en Java:</p>
+<pre><code>    TextView texto = (TextView) findViewById(R.id.texto);  </code></pre>
+<p><em>findViewById()</em> es un método que nos permite acceder a los elementos definidos en XML a partir de sus nombres.</p>
+</section>
+<section id="interfaces" class="slide level1">
+<h1>Interfaces</h1>
+<p>Parecidas a una &quot;clase abstracta&quot; Son un &quot;Contrato&quot;: las clases que <strong>implementan</strong> a una interfaz deben implementar sus métodos.<br />
+Ej: La interfaz &quot;animal&quot; podría incluir métodos como &quot;moverse&quot;, &quot;comer&quot;, etc. Todos los animales deben implementar esos métodos, pero todos lo hacen de forma distinta.</p>
+</section>
+<section id="listeners" class="slide level1">
+<h1>Listeners</h1>
+<p>Esperan (<em>escuchan</em>) eventos generados por el usuario (clicks, etc.) y ejecutan métodos como respuesta.<br />
+Implementan interfaces pre-definidas en el SDK (aunque se pueden crear interfaces propias).<br />
+Cada interfaz responde a un tipo de evento distinto (<em>OnClick</em>, <em>OnLongClick</em>, <em>onTextChange</em>, etc).</p>
+<pre><code>new ImageView.OnClickListener() {
+        @Override
+        public void onClick(View view) { 
+            //Hacer algo
+        }
+};</code></pre>
+</section>
+<section id="como-empezar" class="slide level1">
+<h1>Como Empezar</h1>
+<pre><code>onCreate (...)  </code></pre>
+<p>es uno de los métodos heredados de Activity, y corresponde a una transición en el ciclo de vida (de *) el equivalente al &quot;main&quot; de java o de C. Es responsable de cargar el layout, obtener referencias a las Views se van a usar, y definir sus comportamientos.</p>
+<pre><code>protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main); // le dice a android que cargue el layout
+TextView texto = (TextView) findViewById(R.id.texto);</code></pre>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
